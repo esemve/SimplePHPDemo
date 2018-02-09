@@ -1,0 +1,20 @@
+{
+    "name": "oldal/oldal",
+    "description": "Oldal",
+    "keywords": ["framework", "laravel"],
+    "license": "MIT",
+    "type": "project",
+    "require": {
+        "php": ">=7.0",
+        "doctrine/dbal": "*",
+        "php-di/php-di": "*"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Libs\\": "libs/"
+        }
+    }
+}
