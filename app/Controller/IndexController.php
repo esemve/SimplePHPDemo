@@ -2,15 +2,19 @@
 
 namespace App\Controller;
 
+use Libs\Response\Response;
+
 class IndexController extends AbstractController {
 
-    public function index() {
-        die('JEP');
-    }
-
-    public function index2($page = 0)
+    public function index($a = null): Response
     {
-        die('index2');
+        return $this->render('index.html.php',[]);
     }
 
+    public function index2($alma = 0): Response
+    {
+        return $this->render('index2.html.php',[
+            'alma' => $alma
+        ]);
+    }
 }

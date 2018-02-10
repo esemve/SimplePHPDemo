@@ -16,5 +16,6 @@ return array(
     'Doctrine\\Common\\Annotations\\' => array($vendorDir . '/doctrine/annotations/lib/Doctrine/Common/Annotations'),
     'Doctrine\\Common\\' => array($vendorDir . '/doctrine/common/lib/Doctrine/Common'),
     'DI\\' => array($vendorDir . '/php-di/php-di/src/DI'),
+    'Bootstrap\\' => array($baseDir . '/bootstrap'),
     'App\\' => array($baseDir . '/app'),
 );

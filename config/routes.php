@@ -4,11 +4,10 @@ return [
     'routes' => [
 
         'index2' => [
-            'uri' => '/test/*',
+            'uri' => '/test/{alma}',
             'controller' => \App\Controller\IndexController::class,
             'action' => 'index2'
         ]
-
     ],
 
     'default' => [
@@ -17,6 +16,6 @@ return [
     ],
     'error404' => [
         'controller' => \App\Controller\ErrorController::class,
-        'action' => 'index'
+        'action' => 'error404'
     ],
 ];
