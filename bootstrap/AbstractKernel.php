@@ -35,12 +35,6 @@ abstract class AbstractKernel
         return $this->container;
     }
 
-
-    protected function loadConfig(): void
-    {
-        $this->config = $this->getConfig()->setConfigArray(require(__DIR__.'/../config/config.php'));
-    }
-
     protected function getConfig(): ConfigInterface
     {
         return $this->container->get('libs.config');
@@ -48,7 +42,7 @@ abstract class AbstractKernel
 
     protected function isDebug(): bool
     {
-        return $this->config->get('debug', false);
+        return $this->getConfig()->get('debug', false);
     }
 
     protected function enableDebugMode(): void

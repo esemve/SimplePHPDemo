@@ -3,10 +3,10 @@
 return [
     'routes' => [
 
-        'index2' => [
-            'uri' => '/test/{alma}',
+        'show' => [
+            'uri' => '/show/{id}',
             'controller' => \App\Controller\IndexController::class,
-            'action' => 'index2'
+            'action' => 'show'
         ]
     ],
 

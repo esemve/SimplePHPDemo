@@ -6,6 +6,16 @@ use Libs\Exceptions\FileNotFoundException;
 
 class View implements ViewInterface
 {
+    /**
+     * @var RouterInterface
+     */
+    protected $router;
+
+    public function __construct(RouterInterface $router)
+    {
+        $this->router = $router;
+    }
+
     public function render(string $file, array $parameters = []): string
     {
         $path = __DIR__.'/../views/'.$file;
@@ -16,6 +26,8 @@ class View implements ViewInterface
 
         ob_start();
         extract($parameters);
+
+        $router = $this->router;
 
         require $path;
 

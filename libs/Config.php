@@ -6,11 +6,9 @@ class Config implements ConfigInterface
 {
     protected $config;
 
-    public function setConfigArray(array $config): ConfigInterface
+    public function __construct(array $config)
     {
         $this->config = $config;
-
-        return $this;
     }
 
     public function get(string $key, $default = null)

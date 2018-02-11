@@ -18,7 +18,6 @@ class TestKernel extends AbstractKernel
     public function __construct()
     {
         $this->container = $this->getContainer();
-        $this->loadConfig();
         self::$staticContainer = $this->container;
     }
 

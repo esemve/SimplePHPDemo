@@ -4,7 +4,7 @@ namespace Libs;
 
 use PDO;
 
-class Database
+class Database implements DatabaseInterface
 {
     /**
      * @var ConfigInterface
@@ -23,10 +23,10 @@ class Database
         $this->connect();
     }
 
-    protected function connect()
+    protected function connect(): void
     {
         if ($this->pdo instanceof PDO) {
-            return;
+            throw new \Exception('Database connect call only once!');
         }
 
         $this->pdo = new PDO(

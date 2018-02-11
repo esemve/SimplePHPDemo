@@ -108,4 +108,29 @@ class Router implements RouterInterface
         return $output;
     }
 
+    public function getUrl(string $routeName = 'default', array $params = []): string
+    {
+        if ($routeName==='default') {
+            return '/';
+        }
+
+        if (!isset($this->routes[$routeName])) {
+            throw new \Exception(
+                sprintf('Nincs %s nevű route key!', $routeName)
+            );
+        }
+
+        /**
+         * @todo Not required parts!
+         * @todo ?value=key pairs!
+         */
+
+        $route = $this->routes[$routeName]['uri'];
+        foreach ($params as $key => $value) {
+            $route = str_replace('{'.$key.'}',$value, $route);
+        }
+
+        return $route;
+    }
+
 }

@@ -17,7 +17,6 @@ class WebKernel extends AbstractKernel
     public function __construct()
     {
         $this->container = $this->getContainer();
-        $this->loadConfig();
 
         if ($this->isDebug()) {
             $this->enableDebugMode();

@@ -47,4 +47,13 @@ abstract class AbstractController
         return $this->getContainer()->get('libs.view');
     }
 
+    public function error404(): Response
+    {
+        $response = $this->render('error/404.html.php');
+        $response->setStatusCode(404);
+
+        return $response;
+    }
+
+
 }
