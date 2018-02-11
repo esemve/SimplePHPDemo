@@ -9,12 +9,14 @@
         "php-di/php-di": "*"
     },
     "require-dev": {
+        "phpunit/phpunit": "*"
     },
     "autoload": {
         "psr-4": {
             "App\\": "app/",
             "Libs\\": "libs/",
-            "Bootstrap\\": "bootstrap/"
+            "Bootstrap\\": "bootstrap/",
+            "Test\\": "tests/"
         }
     }
 }

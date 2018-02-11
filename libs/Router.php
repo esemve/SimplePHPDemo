@@ -8,10 +8,6 @@ class Router implements RouterInterface
     protected $default = [];
     protected $error404 = [];
 
-    public function getRoutes() {
-        return $this->routes;
-    }
-
     public function setRouteArray(array $routes): RouterInterface
     {
         if (empty($this->routes)) {
@@ -41,7 +37,7 @@ class Router implements RouterInterface
         $uri = $this->getTrimmedUri($uri);
 
         if ($uri === '') {
-            return $this->default;
+            return array_merge(['key'=>'default'],$this->default);
         }
 
         $explodedUri = $this->getExplodedUri($uri);
@@ -55,7 +51,7 @@ class Router implements RouterInterface
             }
         }
 
-        return $this->error404;
+        return array_merge(['key'=>'error404'], $this->error404);
     }
 
     protected function isMatch(array $explodedUri, string $route): bool
