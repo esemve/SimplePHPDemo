@@ -11,7 +11,7 @@ interface RouterInterface
      * @param array $routes
      * @return RouterInterface
      */
-    public function setRouteArray(array $routes): RouterInterface;
+    public function setRoutes(array $routes): RouterInterface;
 
     /**
      * Kapott uri -ra megnézi, hogy matchel-e valamelyik

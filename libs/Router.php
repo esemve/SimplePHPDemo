@@ -8,7 +8,7 @@ class Router implements RouterInterface
     protected $default = [];
     protected $error404 = [];
 
-    public function setRouteArray(array $routes): RouterInterface
+    public function setRoutes(array $routes): RouterInterface
     {
         if (empty($this->routes)) {
             $output = [];

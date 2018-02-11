@@ -19,7 +19,7 @@ final class Request
         $this->initCsrf();
 
         $this->params = $_REQUEST;
-        $this->type = $_SERVER['REQUEST_METHOD'];
+        $this->type = $_SERVER['REQUEST_METHOD'] ?? null;
 
         unset($_REQUEST);
         unset($_POST);

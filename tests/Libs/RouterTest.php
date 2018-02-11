@@ -13,7 +13,7 @@ class RouterTest extends TestCase
     public function testSetupRoutes(string $uri, string $expectedRoute): void
     {
         $router = $this->getRouter();
-        $router->setRouteArray($this->getFixtures());
+        $router->setRoutes($this->getFixtures());
         $resolved = $router->resolve($uri);
 
         $this->assertEquals($resolved['key'], $expectedRoute);

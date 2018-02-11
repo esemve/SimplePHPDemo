@@ -54,7 +54,7 @@ class WebKernel extends AbstractKernel
 
     protected function loadRouter()
     {
-        $this->getRouter()->setRouteArray(require(__DIR__.'/../config/routes.php'));
+        $this->getRouter()->setRoutes(require(__DIR__.'/../config/routes.php'));
         $this->router = $this->getRouter();
     }
 
