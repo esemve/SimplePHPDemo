@@ -21,6 +21,14 @@ class View implements ViewInterface
         $this->request = $request;
     }
 
+    /**
+     * Kirenderel egy templatet
+     *
+     * @param string $file
+     * @param array $parameters
+     * @return string
+     * @throws FileNotFoundException
+     */
     public function render(string $file, array $parameters = []): string
     {
         $path = __DIR__.'/../views/'.$file;

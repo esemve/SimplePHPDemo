@@ -26,6 +26,13 @@ final class Request
         unset($_GET);
     }
 
+    /**
+     * A requestből kulcs alapján egy értéket ad vissza.
+     *
+     * @param string $key
+     * @param mixed $default Ha nem található a kulcs akkor ezt adja vissza
+     * @return null|string
+     */
     public function get(string $key, ?string $default = null): ?string
     {
         if (!isset($this->params[$key])) {
@@ -35,11 +42,21 @@ final class Request
         return $this->params[$key];
     }
 
+    /**
+     * Visszaadja, hogy a request GET|POST|PUT... tipusu
+     *
+     * @return string
+     */
     public function getType(): string
     {
         return $this->type;
     }
 
+    /**
+     * Visszaadja, hogy POST típusú-e a request
+     *
+     * @return string
+     */
     public function isPost(): string
     {
         if ($this->getType()==='POST') {
@@ -49,6 +66,12 @@ final class Request
         return false;
     }
 
+    /**
+     * A post requesthez csatolva van-e a csrf_token field, és az
+     * valid-e?
+     *
+     * @return bool
+     */
     public function isValidCsrf(): bool
     {
         if ($this->get('csrf_token') === $this->csrf) {
@@ -58,11 +81,19 @@ final class Request
         return false;
     }
 
+    /**
+     * Visszaadja a CSRF token értékét
+     *
+     * @return string
+     */
     public function getCsrf(): string
     {
         return $this->csrf;
     }
 
+    /**
+     * Beállít egy CSRF tokent önmagában és a sessionban
+     */
     protected function initCsrf(): void
     {
         if (empty($_SESSION['csrf'])) {

@@ -6,6 +6,9 @@ abstract class AbstractResponse {
 
     protected $statusCode = 200;
 
+    /**
+     * Státuszkód elküldése
+     */
     public function sendStatusCode(): void
     {
         switch ($this->statusCode) {
@@ -21,6 +24,11 @@ abstract class AbstractResponse {
         }
     }
 
+    /**
+     * Státuszkód beálíltása
+     *
+     * @param int $code
+     */
     public function setStatusCode(int $code): void
     {
         $this->statusCode = $code;

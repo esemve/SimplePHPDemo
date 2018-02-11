@@ -23,6 +23,12 @@ class Database implements DatabaseInterface
         $this->connect();
     }
 
+    /**
+     * Kapcsolódik az adatbázishoz PDO-val, majd
+     * elcacheli magának a PDO -t
+     *
+     * @throws \Exception
+     */
     protected function connect(): void
     {
         if ($this->pdo instanceof PDO) {
@@ -41,6 +47,10 @@ class Database implements DatabaseInterface
         );
     }
 
+    /**
+     * Az élő kapcsolattal rendelkező PDO -t adja vissza
+     * @return PDO
+     */
     public function getPdo(): PDO
     {
         return $this->pdo;

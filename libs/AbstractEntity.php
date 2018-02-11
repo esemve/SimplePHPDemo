@@ -29,6 +29,13 @@ abstract class AbstractEntity
         return $this;
     }
 
+    /**
+     * Az adatbázisban tárolt row -ot tartalmazó
+     * asszociatív tömb
+     *
+     * @param array $array
+     * @return AbstractEntity
+     */
     public function setFromArray(array $array): AbstractEntity
     {
         foreach ($array as $key => $value) {
@@ -38,6 +45,12 @@ abstract class AbstractEntity
         return $this;
     }
 
+    /**
+     * Az entity array -ra konvertált változata
+     *
+     * @param string $keyPrefix
+     * @return array
+     */
     public function getArray(string $keyPrefix = ''): array
     {
         $output = [];
