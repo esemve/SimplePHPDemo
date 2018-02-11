@@ -7,7 +7,17 @@ return [
             'uri' => '/show/{id}',
             'controller' => \App\Controller\IndexController::class,
             'action' => 'show'
-        ]
+        ],
+        'edit' => [
+            'uri' => '/edit/{id}',
+            'controller' => \App\Controller\IndexController::class,
+            'action' => 'edit'
+        ],
+        'create' => [
+            'uri' => '/create/',
+            'controller' => \App\Controller\IndexController::class,
+            'action' => 'create'
+        ],
     ],
 
     'default' => [

@@ -57,4 +57,13 @@ class BlogPost extends AbstractEntity
 
         return $this;
     }
+
+    public function getFieldList(): array
+    {
+        return [
+            'title',
+            'lead',
+            'content'
+        ];
+    }
 }

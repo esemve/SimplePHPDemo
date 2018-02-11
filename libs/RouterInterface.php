@@ -23,5 +23,14 @@ interface RouterInterface
      */
     public function resolve(string $uri): array;
 
+    /**
+     * URL kigenerálása routing name alapján
+     *
+     * @param string $routeName
+     * @param array $params
+     * @return string
+     */
+    public function getUrl(string $routeName = 'default', array $params = []): string;
+
 
 }

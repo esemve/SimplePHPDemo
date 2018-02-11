@@ -10,10 +10,15 @@ class View implements ViewInterface
      * @var RouterInterface
      */
     protected $router;
+    /**
+     * @var Request
+     */
+    private $request;
 
-    public function __construct(RouterInterface $router)
+    public function __construct(RouterInterface $router, Request $request)
     {
         $this->router = $router;
+        $this->request = $request;
     }
 
     public function render(string $file, array $parameters = []): string
@@ -28,6 +33,7 @@ class View implements ViewInterface
         extract($parameters);
 
         $router = $this->router;
+        $request = $this->request;
 
         require $path;
 

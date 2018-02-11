@@ -5,6 +5,14 @@ namespace Libs;
 abstract class AbstractEntity
 {
     /**
+     * Visszaadja az entity azon paramétereit, melyek
+     * a db-ben kerülnek tárolásra
+     *
+     * @return array
+     */
+    abstract public function getFieldList(): array;
+
+    /**
      * @var int
      */
     protected $id;
@@ -28,5 +36,15 @@ abstract class AbstractEntity
         }
 
         return $this;
+    }
+
+    public function getArray(string $keyPrefix = ''): array
+    {
+        $output = [];
+        foreach ($this->getFieldList() as $value) {
+            $output[$keyPrefix.$value] = $this->{$value};
+        }
+
+        return $output;
     }
 }

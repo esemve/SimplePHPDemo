@@ -4,6 +4,7 @@ namespace Bootstrap;
 
 use App\Controller\AbstractController;
 use App\Controller\ErrorController;
+use Libs\Request;
 use Libs\Router;
 use Libs\RouterInterface;
 
@@ -34,6 +35,7 @@ class WebKernel extends AbstractKernel
              */
             $controller = new $resolvedRoute['controller']();
             $controller->setContainer($this->getContainer());
+            $controller->setRequest($this->getRequest());
             $response = call_user_func_array([$controller, $resolvedRoute['action']], $resolvedRoute['parameters'] ?? []);
             $response->sendResponse();
         }
@@ -61,4 +63,8 @@ class WebKernel extends AbstractKernel
         return $this->container->get('libs.router');
     }
 
+    protected function getRequest(): Request
+    {
+        return $this->container->get('libs.request');
+    }
 }
