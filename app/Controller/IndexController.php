@@ -6,9 +6,9 @@ use Libs\Response\Response;
 
 class IndexController extends AbstractController {
 
-    public function index($a = null): Response
+    public function index(): Response
     {
-        return $this->render('index.html.php',[]);
+        return $this->render('index.html.php');
     }
 
     public function index2($alma = 0): Response

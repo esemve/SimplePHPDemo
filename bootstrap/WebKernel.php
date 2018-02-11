@@ -17,6 +17,12 @@ class WebKernel extends AbstractKernel
     public function __construct()
     {
         $this->container = $this->getContainer();
+        $this->loadConfig();
+
+        if ($this->isDebug()) {
+            $this->enableDebugMode();
+        }
+
         $this->loadRouter();
     }
 
@@ -55,4 +61,5 @@ class WebKernel extends AbstractKernel
     {
         return $this->container->get('libs.router');
     }
+
 }

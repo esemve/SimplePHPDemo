@@ -9,8 +9,9 @@ interface RouterInterface
      * Csak egyszer hívható
      *
      * @param array $routes
+     * @return RouterInterface
      */
-    public function setRouteArray(array $routes): void;
+    public function setRouteArray(array $routes): RouterInterface;
 
     /**
      * Kapott uri -ra megnézi, hogy matchel-e valamelyik

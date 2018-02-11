@@ -4,17 +4,17 @@ namespace Libs;
 
 class Router implements RouterInterface
 {
-    protected static $routes = [];
-    protected static $default = [];
-    protected static $error404 = [];
+    protected $routes = [];
+    protected $default = [];
+    protected $error404 = [];
 
     public function getRoutes() {
-        return self::$routes;
+        return $this->routes;
     }
 
-    public function setRouteArray(array $routes): void
+    public function setRouteArray(array $routes): RouterInterface
     {
-        if (empty(self::$routes)) {
+        if (empty($this->routes)) {
             $output = [];
             foreach ($routes['routes'] AS $key => $route) {
                 $output[$this->getTrimmedUri($key)] = $route;
@@ -28,10 +28,12 @@ class Router implements RouterInterface
                 throw new \Exception('Nincs error route beállítva!');
             }
 
-            self::$routes = $output;
-            self::$default = $routes['default'];
-            self::$error404 = $routes['error404'];
+            $this->routes = $output;
+            $this->default = $routes['default'];
+            $this->error404 = $routes['error404'];
         }
+
+        return $this;
     }
 
     public function resolve(string $uri): array
@@ -39,12 +41,12 @@ class Router implements RouterInterface
         $uri = $this->getTrimmedUri($uri);
 
         if ($uri === '') {
-            return self::$default;
+            return $this->default;
         }
 
         $explodedUri = $this->getExplodedUri($uri);
 
-        foreach (self::$routes AS $key => $route) {
+        foreach ($this->routes AS $key => $route) {
             if (true === $this->isMatch($explodedUri, $route['uri'])) {
                 return array_merge([
                     'key' => $key,
@@ -53,7 +55,7 @@ class Router implements RouterInterface
             }
         }
 
-        return self::$error404;
+        return $this->error404;
     }
 
     protected function isMatch(array $explodedUri, string $route): bool
