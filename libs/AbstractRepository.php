@@ -41,7 +41,24 @@ abstract class AbstractRepository
     {
         $this->database = $database;
         $this->entityFactory = $entityFactory;
-        $this->fields = array_merge(['id'],$this->createNewEntity()->getFieldList());
+        $this->fields = $this->createNewEntity()->getFieldList();
+
+        if (($key = array_search('id', $this->fields)) !== false) {
+            unset($this->fields[$key]);
+        }
+
+        ArrayAssert::hasOnlyString($this->fields, true);
+    }
+
+
+    /**
+     * Tábla mezőinek nevét adja vissza az id nélkül!
+     *
+     * @return array
+     */
+    final protected function getFieldList(): array
+    {
+        return $this->fields;
     }
 
     /**
@@ -59,7 +76,7 @@ abstract class AbstractRepository
             throw new \Exception('FindAll csak ASC vagy DESC lehet!');
         }
 
-        if (!in_array($orderBy, $this->fields)) {
+        if (!in_array($orderBy, array_merge(['id'], $this->fields))) {
             throw new \Exception(
                 sprintf('A %s field nem található a táblában!', $orderBy)
             );
@@ -165,8 +182,8 @@ abstract class AbstractRepository
         $sth = $this->database->getPdo()->prepare(
             sprintf('INSERT INTO %s (%s) VALUES (%s)',
                 $this->getTable(),
-                implode(',', $entity->getFieldList()),
-                ':'.implode(',:', $entity->getFieldList())
+                implode(',', $this->getFieldList()),
+                ':'.implode(',:', $this->getFieldList())
             )
         );
 
@@ -192,7 +209,7 @@ abstract class AbstractRepository
             throw new \Exception('Nem sikerült az update!');
         }
 
-        foreach ($entity->getFieldList() as $fieldName) {
+        foreach ($this->getFieldList() as $fieldName) {
             $fields[] = $fieldName.' = :'.$fieldName;
         }
 
