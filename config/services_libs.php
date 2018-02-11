@@ -22,6 +22,4 @@ $container->set('libs.database', \DI\object(\Libs\Database::class)
 ->constructor(
     $container->get('libs.config')
 ));
-$container->set('libs.response.response', \DI\object(\Libs\Response\Response::class));
-$container->set('libs.response.json.response', \DI\object(\Libs\Response\JsonResponse::class));
-$container->set('libs.response.redirect.response', \DI\object(\Libs\Response\RedirectResponse::class));
+$container->set('libs.response.factory', \DI\object(\Libs\Response\ResponseFactory::class));

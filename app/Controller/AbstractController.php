@@ -7,6 +7,7 @@ use Libs\Request;
 use Libs\Response\JsonResponse;
 use Libs\Response\RedirectResponse;
 use Libs\Response\Response;
+use Libs\Response\ResponseFactoryInterface;
 use Libs\ViewInterface;
 use Psr\Container\ContainerInterface;
 
@@ -49,20 +50,6 @@ abstract class AbstractController
         );
     }
 
-    final protected function createJsonResponse(array $content): JsonResponse
-    {
-        $response = clone $this->getContainer()->get('libs.response.json.response');
-        $response->setContent($content);
-        return $response;
-    }
-
-    final protected function createStringResponse(string $content): Response
-    {
-        $response = clone $this->getContainer()->get('libs.response.response');
-        $response->setContent($content);
-        return $response;
-    }
-
     protected function getViewRenderer(): ViewInterface
     {
         return $this->getContainer()->get('libs.view');
@@ -78,10 +65,22 @@ abstract class AbstractController
 
     final public function createRedirectResponse(string $url): RedirectResponse
     {
-        $response = clone $this->getContainer()->get('libs.response.redirect.response');
-        $response->setContent($url);
-        return $response;
+        return $this->getResponseFactory()->createRedirectResponse($url);
+    }
 
+    final protected function createJsonResponse(array $content): JsonResponse
+    {
+        return $this->getResponseFactory()->createJsonResponse($content);
+    }
+
+    final protected function createStringResponse(string $content): Response
+    {
+        return $this->getResponseFactory()->createResponse($content);
+    }
+
+    protected function getResponseFactory(): ResponseFactoryInterface
+    {
+        return $this->getContainer()->get('libs.response.factory');
     }
 
 

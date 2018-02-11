@@ -29,14 +29,17 @@ abstract class AbstractRepository
 
     public function findAll(string $orderBy = 'id', string $order = 'DESC'): array
     {
-        if (!in_array($order, ['ASC','DESC'])) {
+        if (!in_array(strtolower($order), ['asc','desc'])) {
             throw new \Exception('FindAll order must be ASC or DESC!');
         }
 
         $sth = $this->database->getPdo()->prepare(
-            sprintf('SELECT * FROM %s ORDER BY id DESC',$this->getTable())
+            sprintf('SELECT * FROM %s ORDER BY :orderBy %s',
+                $this->getTable(),
+                $order
+            )
         );
-        $sth->execute();
+        $sth->execute([':orderBy' => $orderBy]);
 
         $output = [];
         foreach ($sth->fetchAll(\PDO::FETCH_ASSOC) AS $row) {
