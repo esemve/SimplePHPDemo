@@ -6,7 +6,7 @@
     "type": "project",
     "require": {
         "php": ">=7.0",
-        "php-di/php-di": "*"
+        "php-di/php-di": "5.4.*"
     },
     "require-dev": {
         "phpunit/phpunit": "*"
