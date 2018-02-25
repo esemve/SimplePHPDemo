@@ -57,7 +57,7 @@ class Cache implements CacheInterface
 
     public function flushByPrefix(string $keyPrefix): void
     {
-        $keys = $this->keys($this->prefix.$keyPrefix.':*');
+        $keys = $this->keys($keyPrefix.':*');
         if (!empty($keys)) {
             $this->client->del($keys);
         }

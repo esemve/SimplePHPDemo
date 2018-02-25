@@ -18,6 +18,21 @@ class BlogRepository extends AbstractRepository
         return 'blog';
     }
 
+    public function findById(int $id): AbstractEntity
+    {
+        $cacheKey = 'blogpost:'.$id;
+        $post = $this->getCache()->get($cacheKey);
+
+        if (!empty($post)) {
+            return unserialize($post);
+        }
+
+        $post = parent::findById($id);
+        $this->getCache()->set($cacheKey, serialize($post), 3600);
+
+        return $post;
+    }
+
     public function findAll(string $orderBy = 'id', string $order = 'DESC'): array
     {
         $cacheKey = 'blogposts:'.$orderBy.':'.$order;
@@ -35,13 +50,19 @@ class BlogRepository extends AbstractRepository
 
     public function insert(AbstractEntity $entity): AbstractEntity
     {
-        $this->getCache()->flushByPrefix('blogposts');
+        $this->flushConnectedCache();
         return parent::insert($entity);
     }
 
     public function update(AbstractEntity $entity): AbstractEntity
     {
-        $this->getCache()->flushByPrefix('blogposts');
+        $this->flushConnectedCache();
+        $this->getCache()->del(['blogpost:'.$entity->getId()]);
         return parent::update($entity);
+    }
+t 
+    protected function flushConnectedCache(): void
+    {
+        $this->getCache()->flushByPrefix('blogposts');
     }
 }
