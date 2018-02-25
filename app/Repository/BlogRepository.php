@@ -60,7 +60,7 @@ class BlogRepository extends AbstractRepository
         $this->getCache()->del(['blogpost:'.$entity->getId()]);
         return parent::update($entity);
     }
-t 
+
     protected function flushConnectedCache(): void
     {
         $this->getCache()->flushByPrefix('blogposts');
