@@ -67,4 +67,9 @@ class WebKernel extends AbstractKernel
     {
         return $this->container->get('libs.request');
     }
+
+    protected function getConfigPath(): string
+    {
+        return __DIR__ . '/../config/config.php';
+    }
 }

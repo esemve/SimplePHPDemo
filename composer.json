@@ -6,10 +6,12 @@
     "type": "project",
     "require": {
         "php": ">=7.0",
-        "php-di/php-di": "*"
+        "php-di/php-di": "5.4.*",
+        "predis/predis": "*"
     },
     "require-dev": {
-        "phpunit/phpunit": "*"
+        "phpunit/phpunit": "*",
+        "phpunit/dbunit": "*"
     },
     "autoload": {
         "psr-4": {

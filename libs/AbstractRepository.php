@@ -6,7 +6,6 @@ use Libs\Exceptions\NotFoundException;
 
 abstract class AbstractRepository
 {
-
     /**
      * @var EntityFactoryInterface
      */
@@ -16,6 +15,10 @@ abstract class AbstractRepository
      * @var string[]
      */
     private $fields;
+    /**
+     * @var Cache
+     */
+    private $cache;
 
     /**
      * Visszaadja a repositoryhoz kapcsolódó entity
@@ -37,7 +40,7 @@ abstract class AbstractRepository
      */
     private $database;
 
-    public function __construct(DatabaseInterface $database, EntityFactoryInterface $entityFactory)
+    public function __construct(DatabaseInterface $database, EntityFactoryInterface $entityFactory, CacheInterface $client)
     {
         $this->database = $database;
         $this->entityFactory = $entityFactory;
@@ -48,6 +51,7 @@ abstract class AbstractRepository
         }
 
         ArrayAssert::hasOnlyString($this->fields, true);
+        $this->cache = $client;
     }
 
 
@@ -225,5 +229,10 @@ abstract class AbstractRepository
         );
 
         return $entity;
+    }
+
+    public function getCache(): Cache
+    {
+        return $this->cache;
     }
 }

@@ -29,4 +29,9 @@ class TestKernel extends AbstractKernel
     public function run(): void
     {
     }
+
+    protected function getConfigPath(): string
+    {
+        return __DIR__ . '/../config/config_test.php';
+    }
 }

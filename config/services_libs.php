@@ -2,15 +2,18 @@
 
 /**
 * @var \DI\Container $container
+* @var string $configFilePath
 */
 
 $container->set('libs.router', \DI\object(\Libs\Router::class));
+$container->set('libs.cache', \DI\object(\Libs\Cache::class));
 $container->set('libs.request', \DI\object(\Libs\Request::class));
 
 $container->set('libs.config.factory', \DI\object(\Libs\ConfigFactory::class));
-$container->set('libs.config', DI\factory(['libs.config.factory', 'create']));
-$container->set('libs.entity.factory', \DI\object(\Libs\EntityFactory::class));
+$container->get('libs.config.factory')->setConfigPath($configFilePath);
+$container->set('libs.config', \DI\factory(['libs.config.factory', 'create']));
 
+$container->set('libs.entity.factory', \DI\object(\Libs\EntityFactory::class));
 
 $container->set('libs.view', \DI\object(\Libs\View::class)
 ->constructor(

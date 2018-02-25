@@ -5,12 +5,12 @@ return [
 
     'database' => [
         'host' => '127.0.0.1',
-        'database' => 'purephpdemo',
+        'database' => 'purephpdemo_test',
         'user' => 'purephpdemo',
         'password' => 'purephpdemo',
     ],
 
-    'cachePrefix' => 'simple:',
+    'cachePrefix' => 'simpletest:',
     'redis' => 'tcp://127.0.0.1:6379'
 
 ];

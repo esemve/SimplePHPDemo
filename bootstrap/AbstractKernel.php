@@ -4,7 +4,9 @@ namespace Bootstrap;
 
 use DI\Container;
 use DI\ContainerBuilder;
+use Libs\CacheFactory;
 use Libs\ConfigInterface;
+use Predis\Client;
 use Psr\Container\ContainerInterface;
 
 abstract class AbstractKernel
@@ -27,10 +29,12 @@ abstract class AbstractKernel
             $builder = new ContainerBuilder();
             $container = $builder->build();
 
+            $configFilePath = $this->getConfigPath();
             require_once __DIR__ . '/../config/services.php';
 
             $this->container = $container;
         }
+        $this->registerCache();
 
         return $this->container;
     }
@@ -50,5 +54,14 @@ abstract class AbstractKernel
         ini_set('display_errors', 1);
         error_reporting(E_ALL);
     }
+
+    protected function registerCache(): void
+    {
+        $this->container->get('libs.cache')->setClient(
+            new Client($this->getConfig()->get('redis'))
+        )->setPrefix($this->getConfig()->get('cachePrefix'));
+    }
+
+    abstract protected function getConfigPath(): string;
 
 }
